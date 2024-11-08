@@ -3,6 +3,10 @@
 # WESTERN GOVERNORS UNIVERSITY 
 ## D287 – JAVA FRAMEWORKS
 C.  Customize the HTML user interface for your customer’s application. The user interface should include the shop name, the product names, and the names of the parts.
+-mainscreen.html Line 14, changed shop title to "John's Computer Shop"
+-mainscreen.html Line 19, changed shop page header to "John's Computer Shop"
+-mainscreen.html Line 13 - 18, added a style section to modify the formatting for elements on the page.
+-mainscreen.html Line 14-17, changed the alignment for H1, H2, and Search Bars (form) elements to center the text. Added padding around the elements as well.
 
 
 Note: Do not remove any elements that were included in the screen. You may add any additional elements you would like or any images, colors, and styles, although it is not required.
