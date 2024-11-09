@@ -169,8 +169,27 @@ public class AddProductController {
         List<Part>availParts=new ArrayList<>();
         for(Part p: partService.findAll()){
             if(!product1.getParts().contains(p))availParts.add(p);
+
         }
         theModel.addAttribute("availparts",availParts);
         return "productForm";
     }
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping("/buyProduct")
+    public String buyProduct(@RequestParam("productID") int theId, Model theModel ){
+        Product product2 = productService.findById(theId);
+
+        boolean purchaseConfirmation = product2.buyProduct();
+        if(purchaseConfirmation) {
+            productService.save(product2);
+            theModel.addAttribute("message", "Purchase successful!");
+            return "PurchaseSuccess";
+        }
+        theModel.addAttribute("message", "Purchase failed!");
+        return "PurchaseError";
+    }
+
+
 }

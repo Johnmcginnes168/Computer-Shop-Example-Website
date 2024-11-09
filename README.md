@@ -69,6 +69,8 @@ padding: 20px;
         </div>
 
 E.  Add a sample inventory appropriate for your chosen store to the application. You should have five parts and five products in your sample inventory and should not overwrite existing data in the database.
+Note: Make sure the sample inventory is added only when both the part and product lists are empty. When adding the sample inventory appropriate for the store, the inventory is stored in a set so duplicate items cannot be added to your products. When duplicate items are added, make a “multi-pack” part.
+
 BootStrapData.java Lines 70-131, added sample inventory with the following code:
 
     if(partRepository.count() == 0) {
@@ -134,13 +136,102 @@ BootStrapData.java Lines 70-131, added sample inventory with the following code:
 
         }
 
-Note: Make sure the sample inventory is added only when both the part and product lists are empty. When adding the sample inventory appropriate for the store, the inventory is stored in a set so duplicate items cannot be added to your products. When duplicate items are added, make a “multi-pack” part.
-
 
 F.  Add a “Buy Now” button to your product list. Your “Buy Now” button must meet each of the following parameters:
 •  The “Buy Now” button must be next to the buttons that update and delete products.
 •  The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.
 •  Display a message that indicates the success or failure of a purchase.
+
+
+Created PurchaseSuccess.html with the following code on lines 1-25:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Successful!</title>
+  <style>
+    h1{
+      text-align: center;
+      padding: 20px;
+    }
+     .center-container {
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+<h1>
+  Purchase Successful!
+</h1>
+<div class = "center-container">
+  <a href="http://localhost:8080/"> Return Home</a>
+</div>
+</body>
+</html>
+
+Created PurchaseError.html with the following code on lines 1-25:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Error</title>
+    <style>
+        h1{
+            text-align: center;
+            padding: 20px;
+        }
+        .center-container {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    Purchase Error. Inventory Insufficient.
+</h1>
+<div class = "center-container">
+    <a href="http://localhost:8080/"> Return Home</a>
+</div>
+</body>
+</html>
+
+-mainscreen.html Line 93, added button to purchase product:
+
+<a th:href="@{/buyProduct(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3">Buy</a>
+
+-AddProductController.java Lines 177-192, added the following code:
+
+@Autowired
+private ProductService productService;
+
+    @GetMapping("/buyProduct")
+    public String buyProduct(@RequestParam("productID") int theId, Model theModel ){
+        Product product2 = productService.findById(theId);
+
+        boolean purchaseConfirmation = product2.buyProduct();
+        if(purchaseConfirmation) {
+            productService.save(product2);
+            theModel.addAttribute("message", "Purchase successful!");
+            return "PurchaseSuccess";
+        }
+        theModel.addAttribute("message", "Purchase failed!");
+        return "PurchaseError";
+    }
+
+-Product.java Lines Lines 108-115, added the following code:
+
+public boolean buyProduct() {
+if (this.inv >= 1) {
+this.inv--;
+return true;
+} else {
+return false;
+}
+}
 
 
 G.  Modify the parts to track maximum and minimum inventory by doing the following:
