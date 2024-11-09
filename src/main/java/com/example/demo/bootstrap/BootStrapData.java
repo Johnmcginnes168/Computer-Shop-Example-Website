@@ -1,5 +1,6 @@
 package com.example.demo.bootstrap;
 
+import com.example.demo.domain.InhousePart;
 import com.example.demo.domain.OutsourcedPart;
 import com.example.demo.domain.Part;
 import com.example.demo.domain.Product;
@@ -66,7 +67,68 @@ public class BootStrapData implements CommandLineRunner {
         productRepository.save(bicycle);
         productRepository.save(unicycle);
         */
+        if(partRepository.count() == 0) {
+            InhousePart superRam = new InhousePart();
+            superRam.setName("24 GB RAM");
+            superRam.setPrice(70.00);
+            superRam.setInv(5);
 
+            InhousePart superGPU = new InhousePart();
+            superGPU.setName("Super-Deluxe GPU");
+            superGPU.setPrice(400.00);
+            superGPU.setInv(5);
+
+            InhousePart basicGPU = new InhousePart();
+            basicGPU.setName("Basic GPU");
+            basicGPU.setPrice(200.00);
+            basicGPU.setInv(5);
+
+            InhousePart speakers = new InhousePart();
+            speakers.setName("Speakers");
+            speakers.setPrice(20.00);
+            speakers.setInv(5);
+
+            InhousePart basicRam= new InhousePart();
+            basicRam.setName("8 GB RAM");
+            basicRam.setPrice(30.00);
+            basicRam.setInv(5);
+
+            partRepository.save(superRam);
+            partRepository.save(superGPU);
+            partRepository.save(basicGPU);
+            partRepository.save(speakers);
+            partRepository.save(basicRam);
+            }
+        if(outsourcedPartRepository.count() == 0) {
+            OutsourcedPart superCpu = new OutsourcedPart();
+            superCpu.setName("Quad Core CPU");
+            superCpu.setPrice(700.00);
+            superCpu.setInv(5);
+
+            OutsourcedPart basicCpu = new OutsourcedPart();
+            basicCpu.setName("Dual Core CPU");
+            basicCpu.setPrice(400.00);
+            basicCpu.setInv(5);
+
+            outsourcedPartRepository.save(superCpu);
+            outsourcedPartRepository.save(basicCpu);
+        }
+
+        if(productRepository.count() == 0) {
+            Product gamingPC = new Product("Gaming PC", 1000.00, 10);
+            Product mediaPC = new Product("Media PC", 400.00, 10);
+            Product basicPC = new Product("Basic PC", 200.00, 10);
+            Product serverPC = new Product("Server PC", 300.00, 10);
+            Product deluxeGamingPC = new Product("Deluxe Gaming PC", 2000.00, 10);
+
+            productRepository.save(gamingPC);
+            productRepository.save(mediaPC);
+            productRepository.save(basicPC);
+            productRepository.save(serverPC);
+            productRepository.save(deluxeGamingPC);
+
+
+        }
         System.out.println("Started in Bootstrap");
         System.out.println("Number of Products"+productRepository.count());
         System.out.println(productRepository.findAll());

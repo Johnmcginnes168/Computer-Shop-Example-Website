@@ -14,22 +14,41 @@ Note: Do not remove any elements that were included in the screen. You may add a
 
 D.  Add an “About” page to the application to describe your chosen customer’s company to web viewers and include navigation to and from the “About” page and the main screen.
 
-Created about.html file in the "templates" folder to include the following on lines 1-16 - 
+-Created about.html file in the "templates" folder to include the following on lines 1-35 - 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>About Our Company</title>
+    <style>
+        h1, p{
+            text-align: center;
+            padding: 20px;
+        }
+        p{
+            border: 2px solid #000;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+        .center-container {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
+<h1>
+    About Our Company
+</h1>
 <p>
   Welcome to John's Computer Shop! We strive to be your destination for computer parts and custom-built PC's.
   We are passionate about providing the highest quality components at a reasonable price. Whether you are upgrading,
   building a PC from scratch, or just seeking advice on the latest technology, we are here to help!
 </p>
-
+<div class = "center-container">
 <a href="http://localhost:8080/"> Return Home</a>
+</div>
 </body>
 </html>
 
@@ -39,9 +58,81 @@ Created about.html file in the "templates" folder to include the following on li
 public String about() {
 return "about"; //reference for about.html in the templates directory
 }
+-mainscreen.html Lines 18-21, added the following styles to modify the "About Our Company" link.
+.center-container {
+text-align: center;
+padding: 20px;
+}
+-mainscreen.html Lines 97-99, added the following div class to the "About Our Company" link.
+ <div class = "center-container">
+    <a th:href="@{/about}">About Our Company</a>
+        </div>
 
 E.  Add a sample inventory appropriate for your chosen store to the application. You should have five parts and five products in your sample inventory and should not overwrite existing data in the database.
+BootStrapData.java Lines 70-131, added sample inventory with the following code:
 
+    if(partRepository.count() == 0) {
+            InhousePart superRam = new InhousePart();
+            superRam.setName("24 GB RAM");
+            superRam.setPrice(70.00);
+            superRam.setInv(5);
+
+            InhousePart superGPU = new InhousePart();
+            superGPU.setName("Super-Deluxe GPU");
+            superGPU.setPrice(400.00);
+            superGPU.setInv(5);
+
+            InhousePart basicGPU = new InhousePart();
+            basicGPU.setName("Basic GPU");
+            basicGPU.setPrice(200.00);
+            basicGPU.setInv(5);
+
+            InhousePart speakers = new InhousePart();
+            speakers.setName("Speakers");
+            speakers.setPrice(20.00);
+            speakers.setInv(5);
+
+            InhousePart basicRam= new InhousePart();
+            basicRam.setName("8 GB RAM");
+            basicRam.setPrice(30.00);
+            basicRam.setInv(5);
+
+            partRepository.save(superRam);
+            partRepository.save(superGPU);
+            partRepository.save(basicGPU);
+            partRepository.save(speakers);
+            partRepository.save(basicRam);
+            }
+        if(outsourcedPartRepository.count() == 0) {
+            OutsourcedPart superCpu = new OutsourcedPart();
+            superCpu.setName("Quad Core CPU");
+            superCpu.setPrice(700.00);
+            superCpu.setInv(5);
+
+            OutsourcedPart basicCpu = new OutsourcedPart();
+            basicCpu.setName("Dual Core CPU");
+            basicCpu.setPrice(400.00);
+            basicCpu.setInv(5);
+
+            outsourcedPartRepository.save(superCpu);
+            outsourcedPartRepository.save(basicCpu);
+        }
+
+        if(productRepository.count() == 0) {
+            Product gamingPC = new Product("Gaming PC", 1000.00, 10);
+            Product mediaPC = new Product("Media PC", 400.00, 10);
+            Product basicPC = new Product("Basic PC", 200.00, 10);
+            Product serverPC = new Product("Server PC", 300.00, 10);
+            Product deluxeGamingPC = new Product("Deluxe Gaming PC", 2000.00, 10);
+
+            productRepository.save(gamingPC);
+            productRepository.save(mediaPC);
+            productRepository.save(basicPC);
+            productRepository.save(serverPC);
+            productRepository.save(deluxeGamingPC);
+
+
+        }
 
 Note: Make sure the sample inventory is added only when both the part and product lists are empty. When adding the sample inventory appropriate for the store, the inventory is stored in a set so duplicate items cannot be added to your products. When duplicate items are added, make a “multi-pack” part.
 
