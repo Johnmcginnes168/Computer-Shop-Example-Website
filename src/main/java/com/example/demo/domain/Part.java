@@ -1,6 +1,8 @@
 package com.example.demo.domain;
 
 import com.example.demo.validators.ValidDeletePart;
+import com.example.demo.validators.ValidPartInventory;
+import com.example.demo.validators.ValidPartInventoryMinimum;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -18,6 +20,8 @@ import java.util.Set;
 @ValidDeletePart
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="part_type",discriminatorType = DiscriminatorType.INTEGER)
+@ValidPartInventory
+@ValidPartInventoryMinimum
 @Table(name="Parts")
 public abstract class Part implements Serializable {
     @Id

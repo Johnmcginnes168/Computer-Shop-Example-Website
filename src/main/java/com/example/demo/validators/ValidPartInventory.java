@@ -4,21 +4,18 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.lang.annotation.ElementType.*;
+import java.lang.annotation.RetentionPolicy;
 
-/**
- *
- *
- *
- *
- */
-@Constraint(validatedBy = {EnufPartsValidator.class})
+
+@Constraint(validatedBy = {PartInventoryValidator.class})
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidEnufParts {
-    String message() default "There aren't enough parts in inventory!";
-    Class[] groups() default {};
+
+public @interface ValidPartInventory {
+    String message() default "Inventory can not be higher than maximum inventory";
+    Class [] groups() default {};
     Class [] payload() default {};
 
 }
