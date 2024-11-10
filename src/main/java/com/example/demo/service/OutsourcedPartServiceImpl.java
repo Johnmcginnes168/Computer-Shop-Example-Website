@@ -50,6 +50,7 @@ public class OutsourcedPartServiceImpl implements OutsourcedPartService{
     @Override
     public void save(OutsourcedPart thePart) {
         partRepository.save(thePart);
+        thePart.validateLimits();
 
     }
 
