@@ -472,7 +472,7 @@ assertEquals(minimum,partOut.getMinimum());
 
 @Test
 void getMaximum(){
-int maximum=10;
+int maximum=5;
 partIn.setMaximum(maximum);
 assertEquals(maximum,partIn.getMaximum());
 partOut.setMaximum(maximum);
@@ -480,3 +480,14 @@ assertEquals(maximum,partOut.getMaximum());
 }
 
 J.  Remove the class files for any unused validators in order to clean your code.
+
+DeletePartValidator - 0 Usages (Deleted)
+EnufPartsValidator - 1 Usage
+PartInventoryMinimumValidator - 1 Usage
+PartInventoryValidator - 1 Usage
+PriceProductValidator - 1 Usage
+ValidDeletePart - 4 Usages
+ValidEnufParts - 4 Usages
+ValidPartInventory - 4 Usages
+ValidPartInventoryMinimum - 4 Usages
+ValidProductPrice - 4 Usages

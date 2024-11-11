@@ -168,7 +168,7 @@ class PartTest {
 
     @Test
     void getMaximum(){
-        int maximum=10;
+        int maximum=5;
         partIn.setMaximum(maximum);
         assertEquals(maximum,partIn.getMaximum());
         partOut.setMaximum(maximum);
