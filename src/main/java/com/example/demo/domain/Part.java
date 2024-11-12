@@ -18,10 +18,10 @@ import java.util.Set;
  */
 @Entity
 @ValidDeletePart
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="part_type",discriminatorType = DiscriminatorType.INTEGER)
 @ValidPartInventory
 @ValidPartInventoryMinimum
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="part_type",discriminatorType = DiscriminatorType.INTEGER)
 @Table(name="Parts")
 public abstract class Part implements Serializable {
     @Id
@@ -32,14 +32,14 @@ public abstract class Part implements Serializable {
     double price;
     @Min(value = 0, message = "Inventory value must be positive")
     int inv;
-
+    @Min (value = 0, message = "Minimum must be > 0")
+    int minimum;
+    int maximum;
     @ManyToMany
     @JoinTable(name="product_part", joinColumns = @JoinColumn(name="part_id"),
             inverseJoinColumns=@JoinColumn(name="product_id"))
     Set<Product> products= new HashSet<>();
-@Min (value = 0, message = "Minimum must be > 0")
-int minimum;
-int maximum;
+
     public Part() {
     }
 
@@ -88,12 +88,35 @@ int maximum;
         this.inv = inv;
     }
 
+    public void validateLimits(){
+        if (this.inv < this.minimum){
+            this.inv = this.minimum;
+        }
+        else if (this.inv > this.maximum){
+            this.inv = this.maximum;
+        }
+    }
+
     public Set<Product> getProducts() {
         return products;
     }
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+
+    public void setMinimum(int minimum){
+        this.minimum = minimum;
+    }
+    public void setMaximum(int maximum){
+        this.maximum = maximum;
+    }
+    public int getMinimum(){
+        return this.minimum;
+    }
+    public int getMaximum(){
+        return this.maximum;
     }
 
     public String toString(){
@@ -108,30 +131,11 @@ int maximum;
 
         return id == part.id;
     }
-    public void validateLimits(){
-        if (this.inv < this.minimum){
-            this.inv = this.minimum;
-        }
-        else if (this.inv > this.maximum){
-            this.inv = this.maximum;
-        }
-    }
 
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
 
-    public void setMinimum(int minimum){
-        this.minimum = minimum;
-    }
-    public void setMaximum(int maximum){
-        this.maximum = maximum;
-    }
-    public int getMinimum(){
-        return this.minimum;
-    }
-    public int getMaximum(){
-        return this.maximum;
-    }
+
 }

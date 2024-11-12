@@ -19,6 +19,6 @@ public void initialize(ValidPartInventoryMinimum constraintAnnotation) {
 
 @Override
 public boolean isValid(Part part, ConstraintValidatorContext constraintValidatorContext) {
-    return part.getInv() > part.getMinimum();
+    return part.getInv() >= part.getMinimum();
 }
 }

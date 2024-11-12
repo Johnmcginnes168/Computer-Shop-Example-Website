@@ -56,6 +56,6 @@ public class MainScreenControllerr {
 
     @GetMapping("/about")
     public String about() {
-        return "about"; //reference for about.html in the templates directory
+        return "about";
     }
 }
