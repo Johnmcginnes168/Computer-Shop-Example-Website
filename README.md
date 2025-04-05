@@ -78,11 +78,8 @@ To run this project locally, ensure you have the following installed:
 
 ## Application Screenshots
 
-![Main Screen](screenshot-main-screen.png)
-*Main Screen showing the product catalog and inventory management.*
+![Screenshot of Output](//images/SS1.png)
 
-![About Page](screenshot-about-page.png)
-*About page describing the company.*
 
 ## Technologies Used
 
