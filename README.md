@@ -76,17 +76,7 @@ To run this project locally, ensure you have the following installed:
 - The project uses an H2 database, which is configured to save the data locally in the file system.
 - The database file is located at: `src/main/resources/spring-boot-h2-db102`.
 
-## Application Screenshots
 
-![Screenshot of Output](images/SS1.png)
-![Screenshot of Output](images/SS2.png)
-![Screenshot of Output](images/SS3.png)
-![Screenshot of Output](images/SS4.png)
-![Screenshot of Output](images/SS5.png)
-![Screenshot of Output](images/SS6.png)
-![Screenshot of Output](images/SS7.png)
-![Screenshot of Output](images/SS8.png)
-![Screenshot of Output](images/SS9.png)
 
 ## Technologies Used
 
