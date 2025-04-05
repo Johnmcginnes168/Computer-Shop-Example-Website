@@ -79,7 +79,14 @@ To run this project locally, ensure you have the following installed:
 ## Application Screenshots
 
 ![Screenshot of Output](images/SS1.png)
-
+![Screenshot of Output](images/SS2.png)
+![Screenshot of Output](images/SS3.png)
+![Screenshot of Output](images/SS4.png)
+![Screenshot of Output](images/SS5.png)
+![Screenshot of Output](images/SS6.png)
+![Screenshot of Output](images/SS7.png)
+![Screenshot of Output](images/SS8.png)
+![Screenshot of Output](images/SS9.png)
 
 ## Technologies Used
 
